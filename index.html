@@ -45,7 +45,6 @@
       <div class="card">
         <div class="card-header">Parameters</div>
         <div class="card-body">
-          <!-- Show/Hide lines -->
           <div class="form-check form-switch">
             <input
               class="form-check-input"
@@ -58,7 +57,6 @@
             <label class="form-check-label" for="show-lines">Show lines</label>
           </div>
 
-          <!-- Toggle shading -->
           <div class="form-check form-switch">
             <input
               class="form-check-input"
@@ -74,8 +72,26 @@
           </div>
         </div>
       </div>
-    </div>
+      <div class="card">
+        <h5 class="card-header">Information</h5>
 
+        <!-- tooltip -->
+        <span
+          class="badge bg-secondary position-absolute top-0 end-0 m-2"
+          data-bs-toggle="popover"
+          data-bs-content="pickingHelper"
+          >?</span
+        >
+        <p class="card-text d-none" id="pickingHelper">
+          Some informations embedded in the vector data
+        </p>
+
+        <div class="card-body">
+          <!-- Result table -->
+          <div id="results"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="src/index.js"></script>
     <script>
       /* activate popovers */

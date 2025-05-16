@@ -103,6 +103,7 @@ const featureCollection = new FeatureCollection({
   minLevel: 0,
   maxLevel: 0,
   style: (feature) => {
+    console.log("feature", feature)
     return {
       fill: {
         color: colorFromId(feature.get("id") || feature.getId()),
@@ -162,3 +163,34 @@ if (document.getElementById('show-lines')) {
       featureCollection.updateStyles();
     });
 }
+
+const resultTable = document.getElementById("results");
+instance.domElement.addEventListener("mousemove", (e) => {
+  resultTable.innerHTML = "";
+  const pickResults = instance.pickObjectsAt(e, {
+    radius: 5,
+    limit: 1,
+    pickFeatures: true,
+    sortByDistance: true,
+  });
+  
+  const pickedObject = pickResults[0]?.object?.userData?.feature?.values_;
+  console.log("pickedObject", pickedObject)
+  if (pickedObject) {
+    for (const [key, value] of Object.entries(pickedObject)) {
+      if (key !== "geometry" && !key.includes("FeatureCollection_ID")) {
+        console.log(key, value);
+        resultTable.innerHTML += `${key}: ${value}<br>`;
+      }
+      
+    }
+
+    // for (const key in pickedObject) {
+    //   console.log(pickedObject)
+    //   const layerName = layer.name;
+    //   const featureName =
+    //     feature.get("nom") ?? feature.get("name") ?? feature.get("gid");
+    //   resultTable.innerHTML += `${layerName}: ${featureName}<br>`;
+    // }
+  }
+});
