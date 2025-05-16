@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>GeoJSON 3D</title>
+    <meta charset="UTF-8" />
+    <meta name="name" content="geojson_3d" />
+    <meta
+      name="description"
+      content="Represents 3D shapes from a GeoJSON file."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="https://giro3d.org/images/favicon.svg" />
+    <link
+      href="https://giro3d.org/assets/bootstrap-custom.css"
+      rel="stylesheet"
+    />
+    <script src="https://giro3d.org/assets/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://giro3d.org/latest/examples/css/example.css"
+    />
+
+    <style>
+      #view canvas {
+        background: rgb(132, 170, 182);
+        background: radial-gradient(
+          circle,
+          rgba(132, 170, 182, 1) 0%,
+          rgba(37, 44, 48, 1) 100%
+        );
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="view" class="m-0 p-0 w-100 h-100"></div>
+    <div
+      id="inspector"
+      class="position-absolute top-0 start-0 mh-100 overflow-auto"
+    ></div>
+
+    <div class="side-pane-with-status-bar">
+      <div class="card">
+        <div class="card-header">Parameters</div>
+        <div class="card-body">
+          <!-- Show/Hide lines -->
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              checked="true"
+              role="switch"
+              id="show-lines"
+              autocomplete="off"
+            />
+            <label class="form-check-label" for="show-lines">Show lines</label>
+          </div>
+
+          <!-- Toggle shading -->
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              checked="true"
+              role="switch"
+              id="toggle-shading"
+              autocomplete="off"
+            />
+            <label class="form-check-label" for="toggle-shading"
+              >Enable shading</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="src/index.js"></script>
+    <script>
+      /* activate popovers */
+      const popoverTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="popover"]'),
+      );
+      popoverTriggerList.map(
+        // bootstrap is used as script in the template, disable warning about undef
+        // eslint-disable-next-line no-undef
+        (popoverTriggerEl) =>
+          new bootstrap.Popover(popoverTriggerEl, {
+            trigger: "hover",
+            placement: "left",
+            content: document.getElementById(
+              popoverTriggerEl.getAttribute("data-bs-content"),
+            ).innerHTML,
+            html: true,
+          }),
+      );
+    </script>
+  </body>
+</html>
