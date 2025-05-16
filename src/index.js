@@ -103,7 +103,6 @@ const featureCollection = new FeatureCollection({
   minLevel: 0,
   maxLevel: 0,
   style: (feature) => {
-    console.log("feature", feature)
     return {
       fill: {
         color: colorFromId(feature.get("id") || feature.getId()),
@@ -184,13 +183,5 @@ instance.domElement.addEventListener("mousemove", (e) => {
       }
       
     }
-
-    // for (const key in pickedObject) {
-    //   console.log(pickedObject)
-    //   const layerName = layer.name;
-    //   const featureName =
-    //     feature.get("nom") ?? feature.get("name") ?? feature.get("gid");
-    //   resultTable.innerHTML += `${layerName}: ${featureName}<br>`;
-    // }
   }
 });
